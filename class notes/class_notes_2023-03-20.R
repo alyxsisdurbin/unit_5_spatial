@@ -17,7 +17,10 @@ CAN_crit_hab = read.csv("data/NARW_canadian_critical_habitat_2017.csv")
 head(CAN_crit_hab)
 
 CAN_crit_hab_sf = CAN_crit_hab %>%
-  st_as_sf(coords=c("lon", "lat"), crs=4326)
+  st_as_sf(coords=c("lon", "lat"), crs=4326) %>%
+  dplyr::group_by(habitat, country) %>%
+  dplyr::summarize(do_union=FALSE) %>%
+  st_cast("POLYGON")
 
 
 
