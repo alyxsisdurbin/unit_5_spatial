@@ -23,8 +23,11 @@ CAN_crit_hab_sf = CAN_crit_hab %>%
   st_cast("POLYGON")
 
 
+USA_crit_hab_sf$habitat = c("GOM", "SEUS")
+USA_crit_hab$country = "USA"
 
-
+USA_crit_hab_sf = USA_crit_hab_sf %>%
+  dplyr::select(country, habitat, geometry)
 
 # Carcass location data
 carcass = read.csv('data/RW_carcasses_2017.csv')
